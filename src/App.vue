@@ -34,12 +34,16 @@ export default {
   },
   data() {
     return {
-      todos: [
-        { id: "001", title: "吃饭", done: true },
-        { id: "002", title: "喝酒", done: false },
-        { id: "003", title: "打牌", done: true }
-      ]
+      todos: JSON.parse(localStorage.getItem('todos')) || []
     };
+  },
+  watch: {
+    todos:{
+      handler(value){
+        localStorage.setItem('todos',JSON.stringify(value))
+      },
+      deep:true
+    }
   },
   methods: {
     //添加todo

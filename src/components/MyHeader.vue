@@ -4,6 +4,7 @@
       <input
         type="text"
         placeholder="请输入你的任务名称，按回车键确认"
+        v-model="title"
         @keyup.enter="add"
       />
     </div>
@@ -19,14 +20,19 @@ export default {
   props:['addTodo'],
   data() {
     return {
-
+      title:''
     };
   },
   methods:{
-    add(e){
-      const todoOgj = {id:nanoid(),title:e.target.value,done:false}
-      // console.log(todoOgj)
-      this.addTodo(todoOgj)
+    add(){
+      //校验数据
+      if(!this.title.trim()) return alert('输入不能为空')
+      //数据包裹成对象
+      const todoOgj = {id:nanoid(),title:this.title,done:false}
+      //添加
+      this.addTodo(todoOgj),
+      //清空
+      this.title = ''
     },
   }
 };

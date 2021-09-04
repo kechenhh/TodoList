@@ -4,6 +4,7 @@
       v-for="todoOgj in todos"
       :key="todoOgj.id"
       :todo="todoOgj"
+      :checkTodo="checkTodo"
     ></my-item>
   </ul>
 </template>
@@ -16,7 +17,7 @@ export default {
   components: {
     MyItem
   },
-  props:['todos'],
+  props:['todos','checkTodo'],
   data() {
     return {
 

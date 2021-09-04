@@ -3,9 +3,17 @@
     <div id="root">
       <div class="todo-container">
         <div class="todo-wrap">
-          <my-header :addTodo="addTodo"></my-header>
-          <my-list :todos="todos" :checkTodo="checkTodo"></my-list>
-          <my-footer></my-footer>
+          <my-header :addTodo="addTodo" />
+          <my-list
+            :todos="todos"
+            :checkTodo="checkTodo"
+            :deleteTodo="deleteTodo"
+          />
+          <my-footer
+            :todos="todos"
+            :checkAllTodo="checkAllTodo"
+            :clearAllTodo="clearAllTodo"
+          />
         </div>
       </div>
     </div>
@@ -33,16 +41,32 @@ export default {
       ]
     };
   },
-  methods:{
+  methods: {
     //添加todo
-    addTodo(todoOgj){
-      this.todos.unshift(todoOgj)
+    addTodo(todoOgj) {
+      this.todos.unshift(todoOgj);
     },
     //勾选/取消todo
-    checkTodo(id){
-      this.todos.forEach((todo)=>{
-        if(todo.id === id) todo.done = !todo.done
-      })
+    checkTodo(id) {
+      this.todos.forEach(todo => {
+        if (todo.id === id) todo.done = !todo.done;
+      });
+    },
+    //删除
+    deleteTodo(id) {
+      this.todos = this.todos.filter(todo => todo.id !== id);
+    },
+    //全选 or 取消全选
+    checkAllTodo(done) {
+      this.todos.forEach(todo => {
+        todo.done = done;
+      });
+    },
+    //清除已完成
+    clearAllTodo() {
+      this.todos = this.todos.filter(todo => {
+        return !todo.done;
+      });
     }
   }
 };
